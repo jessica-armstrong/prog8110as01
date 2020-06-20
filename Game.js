@@ -51,16 +51,16 @@ module.exports = class Game{
                 break;
             case GameState.TOAST:
                 if(sInput.toLowerCase().match("toast")){
-                    sReply = "you enter a new world of adventure ...";
-                    this.stateCur = GameState.APPEAR;
+                    sReply = "you enter a new world of adventure ... would you like to CONTINUE?";
+                    this.stateCur = GameState.CONTINUE;
                 }else{
                     sReply = "the phone lines are down ... Would you like some toast perhaps?";
                     this.stateCur = GameState.TOAST;
                 }
                 // first statement
                 break;
-            case GameState.APPEAR:
-                if(sInput.toLowerCase().match("appear")){
+            case GameState.CONTINUE:
+                if(sInput.toLowerCase().match("continue")){
                     sReply = "a gnome appears in front of you, as your entire surroundings dissapper... Do you speak to the gnome?";
                     this.stateCur = GameState.SPEAK;
                 }
