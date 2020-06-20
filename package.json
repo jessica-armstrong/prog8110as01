@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rhildred/es6test.git"
+    "url": "git+https://github.com/jessica-armstrong/prog8110as01.git"
   },
   "keywords": [
     "node",
@@ -18,12 +18,12 @@
     "problem",
     "solving"
   ],
-  "author": "Rich Hildred",
+  "author": "Jessica Armstrong",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rhildred/es6test/issues"
+    "url": "https://github.com/jessica-armstrong/"
   },
-  "homepage": "https://github.com/rhildred/es6test#readme",
+  "homepage": "https://github.com/jessica-armstrong/prog8110as01.git",
   "dependencies": {
     "express": "*"
   }
