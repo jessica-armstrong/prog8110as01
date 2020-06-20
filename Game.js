@@ -60,13 +60,13 @@ module.exports = class Game{
                 // first statement
                 break;
             case GameState.CONTINUE:
-                if(sInput.toLowerCase().match("leave")){
+                if(sInput.toLowerCase().match("continue")){
                     sReply = "a gnome appears in front of you, as your entire surroundings dissapper... Do you speak to the gnome or LEAVE?";
                     this.stateCur = GameState.SPEAK;
                 }
                 else{
                     sReply = "the gnome dissappears and you land back at the party... would you like some toast perhaps?";
-                    this.stateCur = GameState.SPEAK;
+                    this.stateCur = GameState.BUTLER;
                 }
                 // second statement 
                 break;
