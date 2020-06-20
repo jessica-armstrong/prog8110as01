@@ -22,39 +22,61 @@ module.exports = class Game{
                 break;
             case GameState.FLAT:
                 if(sInput.toLowerCase().match("wait")){
-                    sReply = "The road is deserted. After 1 hour there is still no help. Do you keep Waiting or do you go to the house?";
+                    sReply = "The road is deserted. After 1 hour there is still no help. Do you stay and WAIT or do you GO to the house?";
                 }else{
-                    sReply ="On the door is a large knocker. Do you knock or run back to your car to wait?";
+                    sReply ="On the door is a large knocker. Do you KNOCK or RUN back to your car to wait?";
                     this.stateCur = GameState.MANSION;
                 }
                 break;
             case GameState.MANSION:
                 if(sInput.toLowerCase().match("knock")){
-                    sReply = "The door opens and you are greeted by a hunch-back butler. He asks you to come in. Do you go in or run back to the car?"
+                    sReply = "The door opens and you are greeted by a hunch-back butler. He asks you to come in. Do you GO in or RUN back to the car?"
                     this.stateCur = GameState.BUTLER;
                 }else{
-                    sReply = "The road is deserted. After 1 hour there is still no help. Do you keep Waiting or do you go to the house?";
+                    sReply = "The road is deserted. After 1 hour there is still no help. Do you stay and WAIT or do you go to the house?";
                     this.stateCur = GameState.FLAT;
 
                 }
                 break;
             case GameState.BUTLER:
                 if(sInput.toLowerCase().match("run")){
-                    sReply = "The road is deserted. After 1 hour there is still no help. Do you keep Waiting or do you go to the house?";
+                    sReply = "The road is deserted. After 1 hour there is still no help. Do you stay and WAIT or do you GO to the house?";
                     this.stateCur = GameState.FLAT;
 
                 }else{
-                    sReply = "You seem to have walked in to a party. The host offers you some toast. Do you take the toast or ask to call a tow truck?";
+                    sReply = "You seem to have walked in to a party. The host offers you some toast. Do you take the TOAST or ask to call a tow truck?";
                     this.stateCur = GameState.TOAST;
     
                 }
                 break;
             case GameState.TOAST:
                 if(sInput.toLowerCase().match("toast")){
-                    sReply = "you enter a new world of adventure ... game over";
-                    this.stateCur = GameState.WELCOMING;
+                    sReply = "you enter a new world of adventure ...";
+                    this.stateCur = GameState.APPEAR;
                 }else{
                     sReply = "the phone lines are down ... Would you like some toast perhaps?";
+                    this.stateCur = GameState.TOAST;
+                }
+                // first statement
+                break;
+            case GameState.APPEAR:
+                if(sInput.toLowerCase().match("appear")){
+                    sReply = "a gnome appears in front of you, as your entire surroundings dissapper... Do you speak to the gnome?";
+                    this.stateCur = GameState.SPEAK;
+                }
+                else{
+                    sReply = "the gnome dissappears and you land back at the party... would you like some toast perhaps?";
+                    this.stateCur = GameState.TOAST;
+                }
+                // second statement 
+                break;
+            case GameState.SPEAK:
+                if(sInput.toLowerCase().match("speak")){
+                    sReply = "The gnome quietly says 'I've lost track of time. Can you help me stop the clocks?' Do you help the gnome stop the CLOCKS?";
+                    this.stateCur = GameState.CLOCKS;
+                }
+                else{
+                    sReply = "The gnome checks his watch, only to disappear once more. You arrive back at the party. Do you run or go find the host?"
                 }
         }
         return([sReply]);
