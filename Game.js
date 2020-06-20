@@ -55,13 +55,13 @@ module.exports = class Game{
                     this.stateCur = GameState.CONTINUE;
                 }else{
                     sReply = "the phone lines are down ... Would you like some toast perhaps?";
-                    this.stateCur = GameState.TOAST;
+                    this.stateCur = GameState.BUTLER;
                 }
                 // first statement
                 break;
             case GameState.CONTINUE:
                 if(sInput.toLowerCase().match("continue")){
-                    sReply = "a gnome appears in front of you, as your entire surroundings dissapper... Do you speak to the gnome?";
+                    sReply = "a gnome appears in front of you, as your entire surroundings dissapper... Do you speak to the gnome or leave?";
                     this.stateCur = GameState.SPEAK;
                 }
                 else{
@@ -76,7 +76,8 @@ module.exports = class Game{
                     this.stateCur = GameState.CLOCKS;
                 }
                 else{
-                    sReply = "The gnome checks his watch, only to disappear once more. You arrive back at the party. Do you run or go find the host?"
+                    sReply = "The gnome checks his watch, only to disappear once more. You arrive back at the party. Do you run or go find the host?";
+                    this.stateCur = GameState.WELCOMING;
                 }
         }
         return([sReply]);
