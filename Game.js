@@ -83,7 +83,39 @@ module.exports = class Game{
                     this.stateCur = GameState.WELCOMING;
                 }
         }
-        while (sReply === "" ) {}
+        while (sReply === "" ) {
+            switch (this.stateCur) {
+                case GameState.MENU:
+                    sReply = "Choose one of the following options to start the game:\n" +
+                        "A. Continue \n" +
+                        "B. Wait \n" +
+                        "C. Leave \n" +
+                        "Please enter A, B, or C to make your choice.";
+                    this.stateCur = GameState.CHOICE;
+                    
+                    break;
+
+                    case GameState.CHOICE:
+                        if (sInput === "A") {
+                            sReply = "you chose to Continue the game, here is your next choice";
+                            this.stateCur = GameState.STATEA;
+                        }
+                        else if (sInput === "B") {
+                            sReply = "you chose to Wait.";
+                            this.stateCur = GameState.STATEB;
+                        }
+                        else if (sInput === "C") {
+                            sReply = "goodbye, game over.";
+                            this.stateCur = GameState.STATEC;
+                        }
+                        else {
+                            this.stateCur = GameState.MENU;
+                            continue;
+                        }
+                        break;
+
+            }
+        }
         return([sReply]);
     }
 }
