@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-const Game = require("./Game");
+const Game = require("./Adventure");
 
 // Create a new express application instance
 const app = express();
