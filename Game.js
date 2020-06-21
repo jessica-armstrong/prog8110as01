@@ -4,7 +4,10 @@ const GameState = Object.freeze({
     WAIT: Symbol("wait"),
     MANSION: Symbol("mansion"),
     BUTLER: Symbol("butler"),
-    TOAST: Symbol("toast")
+    TOAST: Symbol("toast"),
+    CONTINUE: Symbol("continue"),
+    SPEAK: Symbol("speak")
+
 });
 
 module.exports = class Game{
@@ -58,7 +61,7 @@ module.exports = class Game{
                     this.stateCur = GameState.BUTLER;
                 }
                 // first statement
-                break;
+                break;  
             case GameState.CONTINUE:
                 if(sInput.toLowerCase().match("continue")){
                     sReply = "a gnome appears in front of you, as your entire surroundings dissapper... Do you speak to the gnome or LEAVE?";
@@ -80,6 +83,7 @@ module.exports = class Game{
                     this.stateCur = GameState.WELCOMING;
                 }
         }
+        while (sReply === "" ) {}
         return([sReply]);
     }
 }
