@@ -7,6 +7,7 @@ const GameState = Object.freeze({
     TOAST: Symbol("toast"),
     CONTINUE: Symbol("continue"),
     SPEAK: Symbol("speak")
+    
 
 });
 
@@ -20,12 +21,12 @@ module.exports = class Game{
         let sReply = "";
         switch(this.stateCur){
             case GameState.WELCOMING:
-                sReply = "It is a dark and rainy night. Bang! You have a flat tire. Too bad you don't have a spare. Do you WAIT or GO to the spooky mansion for help?";
+                sReply = "It is a dark and rainy night. Bang! You have a flat tire. Too bad you don't have a spare. Do you WAIT or go to the spooky mansion for help?";
                 this.stateCur = GameState.FLAT;
                 break;
             case GameState.FLAT:
                 if(sInput.toLowerCase().match("wait")){
-                    sReply = "The road is deserted. After 1 hour there is still no help. Do you stay and WAIT or do you GO to the house?";
+                    sReply = "The road is deserted. After 1 hour there is still no help. Do you stay and WAIT or do you go to the house?";
                 }else{
                     sReply ="On the door is a large knocker. Do you KNOCK or RUN back to your car to wait?";
                     this.stateCur = GameState.MANSION;
@@ -43,7 +44,7 @@ module.exports = class Game{
                 break;
             case GameState.BUTLER:
                 if(sInput.toLowerCase().match("run")){
-                    sReply = "The road is deserted. After 1 hour there is still no help. Do you stay and WAIT or do you GO to the house?";
+                    sReply = "The road is deserted. After 1 hour there is still no help. Do you stay and WAIT or do you go to the house?";
                     this.stateCur = GameState.FLAT;
 
                 }else{
