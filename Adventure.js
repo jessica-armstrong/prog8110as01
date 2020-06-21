@@ -101,8 +101,8 @@ module.exports = class Game{
                 else{
                     sReply = 
                             "The gnome disappears when you try to speak to him this time\n\n"+
-                            "Do you continue on the quest or would you like to quit?"
-                    this.stateCur = GameState.CONTINUE;
+                            "Do you call back the gnome or would you like to quit?"
+                    this.stateCur = GameState.CALL;
                 }
                 break;
             case GameState.CONTINUE: 
