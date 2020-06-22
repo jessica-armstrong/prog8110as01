@@ -1,7 +1,6 @@
 
 const GameState = Object.freeze({
     WELCOMING:      Symbol("welcoming"),
-    STARTPROMPT:    Symbol("startprompt"),
     START:          Symbol("start"),
     QUIT:           Symbol("quit"),
     SPEAK:          Symbol("speak"),
@@ -12,9 +11,10 @@ const GameState = Object.freeze({
     DIRECTION:      Symbol("forward"),
     FAIL:           Symbol("back"),
     FOLLOW:         Symbol("follow"),
-    WINNER:         Symbol("stop")
+    ONEOCLOCK:      Symbol("stop")
 
-})
+
+});
 
 module.exports = class Game{
     constructor(){
@@ -39,14 +39,12 @@ module.exports = class Game{
                             "Type SPEAK to speak with the gnome.";
                     this.stateCur = GameState.SPEAK;
                 }
-                else{
-                    sReply = "Please type START to begin. You can end the game anytime by typing QUIT";
-                }
-                break;
-            case GameState.QUIT: // if the user decides to end the game
-                if(sInput.toLowerCase().match("quit")){
+                else if(sInput.toLowerCase().match("quit")){
                     sReply = "Game Over";
                     this.StateCur = GameState.WELCOMING;
+                }
+                else{
+                    sReply = "Please type START to begin. You can end the game anytime by typing QUIT";
                 }
                 break;
             case GameState.SPEAK: // when the user chooses to speak to the gnome
@@ -55,6 +53,10 @@ module.exports = class Game{
                             "The gnome quietly says 'I've lost track of time. Can you help me stop the clocks?'\n\n" +
                             "Do you HELP the gnome stop the clocks?";
                     this.stateCur = GameState.HELP;
+                }
+                else if(sInput.toLowerCase().match("quit")){
+                    sReply = "Game Over";
+                    this.StateCur = GameState.WELCOMING;
                 }
                 else{
                     sReply = 
@@ -70,6 +72,10 @@ module.exports = class Game{
                             "Do you ACCEPT the quest?";
                     this.stateCur = GameState.QUEST;
                 }
+                else if(sInput.toLowerCase().match("quit")){
+                    sReply = "Game Over";
+                    this.StateCur = GameState.WELCOMING;
+                }
                 else{
                     sReply = 
                             "The gnome looks very sad and turns his back to you.\n"+
@@ -82,6 +88,10 @@ module.exports = class Game{
                 if(sInput.toLowerCase().match("call")){
                     sReply = "The gnome appears infront of you. Do you speak to the gnome?";
                     this.stateCur = GameState.SPEAK;
+                }
+                else if(sInput.toLowerCase().match("quit")){
+                    sReply = "Game Over";
+                    this.StateCur = GameState.WELCOMING;
                 }
                 else{
                     sReply = 
@@ -98,6 +108,10 @@ module.exports = class Game{
                             "Do you ask any questions or do you CONTINUE on the quest with the stopped clock?";
                     this.stateCur = GameState.CONTINUE;
                 }
+                else if(sInput.toLowerCase().match("quit")){
+                    sReply = "Game Over";
+                    this.StateCur = GameState.WELCOMING;
+                }
                 else{
                     sReply = 
                             "The gnome disappears when you try to speak to him this time\n\n"+
@@ -112,6 +126,10 @@ module.exports = class Game{
                             "Do you FOLLOW the sound of the clock, or keep going on your way?";
                     this.stateCur = GameState.FOLLOW;
                 }
+                else if(sInput.toLowerCase().match("quit")){
+                    sReply = "Game Over";
+                    this.StateCur = GameState.WELCOMING;
+                }
                 else{
                     sReply = "You have discovered nothing. Would you like to go FORWARDS or BACKWARDS?";
                     this.stateCur = GameState.DIRECTION;
@@ -119,14 +137,18 @@ module.exports = class Game{
                 break;
             case GameState.DIRECTION:
                 if(sInput.toLowerCase().match("forward")){
-                    sReply = "You chose to go forward. It is now year 3020.";
-                    this.stateCur = GameState.FORWARD;
+                    sReply = "You chose to go forward. It is now year 3020. do you go back?";
+                    this.stateCur = GameState.DIRECTION;
                 }
                 else if(sInput.toLowerCase().match("back")){
                     sReply = 
                             "You hear a clock ticking, but it's not the one in your pocket\n"+
                             "Do you FOLLOW the sound of the clock, or keep going on your way?";
                     this.stateCur = GameState.FOLLOW;
+                }
+                else if(sInput.toLowerCase().match("quit")){
+                    sReply = "Game Over";
+                    this.StateCur = GameState.WELCOMING;
                 }
                 else{
                     sReply = 
@@ -150,6 +172,10 @@ module.exports = class Game{
                     sReply = "You found a clock stuck at 1 O'Clock! Do you STOP the clock?";
                     this.StateCur = GameState.ONEOCLOCK;
                 }
+                else if(sInput.toLowerCase().match("quit")){
+                    sReply = "Game Over";
+                    this.StateCur = GameState.WELCOMING;
+                }
                 else{
                     sReply = 
                             "You have failed the quest.\n\n"+
@@ -159,16 +185,14 @@ module.exports = class Game{
                 break;
             case GameState.ONEOCLOCK:
                 if(sInput.toLowerCase().match("stop")){
-                    sReply ="You have stopped the clock! CONGRATULATIONS!";
-                    this.stateCur = GameState.WINNER;
+                    sReply = "You have stopped the clock! CONGRATULATIONS! Would you like to PLAY again?";
+                    this.stateCur = GameState.WELCOMING;
                 }
-                else{
-                    sReply = 
-                    "You have failed the quest.\n\n"+
-                    "Would you like to try to CALL the gnome back or QUIT the game?";
-                    this.stateCur = GameState.FAIL;
+                else {
+                    sReply = "Game over. Type START to begin.";
+                    this.stateCur = GameState.START;
                 }
-                break;
+                
         }
         return([sReply]);
     }
