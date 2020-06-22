@@ -11,8 +11,7 @@ const GameState = Object.freeze({
     DIRECTION:      Symbol("forward"),
     FAIL:           Symbol("back"),
     FOLLOW:         Symbol("follow"),
-    ONEOCLOCK:      Symbol("stop")
-
+   
 
 });
 
@@ -164,26 +163,23 @@ module.exports = class Game{
                 }
                 else if(sInput.toLowerCase().match("quit")){
                     sReply = "Game Over";
-                    this.StateCur = GameState.WELCOMING;
+                    this.stateCur = GameState.WELCOMING;
                 }
                 break;
             case GameState.FOLLOW:
                 if(sInput.toLowerCase().match("follow")){
                     sReply = "You found a clock stuck at 1 O'Clock! Do you STOP the clock?";
-                    this.StateCur = GameState.ONEOCLOCK;
-                }
-                else if(sInput.toLowerCase().match("quit")){
-                    sReply = "Game Over";
-                    this.StateCur = GameState.WELCOMING;
+                    this.stateCur = GameState.STOP;
                 }
                 else{
                     sReply = 
-                            "You have failed the quest.\n\n"+
-                            "Would you like to try to CALL the gnome back or QUIT the game?";
-                    this.stateCur = GameState.FAIL;
+                            "You hear a clock ticking, but it's not the one in your pocket\n"+
+                            "Do you FOLLOW the sound of the clock, or keep going on your way?";
+                    this.stateCur = GameState.FOLLOW;
                 }
+               
                 break;
-            case GameState.ONEOCLOCK:
+            case GameState.STOP:
                 if(sInput.toLowerCase().match("stop")){
                     sReply = "You have stopped the clock! CONGRATULATIONS! Would you like to PLAY again?";
                     this.stateCur = GameState.WELCOMING;
@@ -192,7 +188,7 @@ module.exports = class Game{
                     sReply = "Game over. Type START to begin.";
                     this.stateCur = GameState.START;
                 }
-                
+                break;
         }
         return([sReply]);
     }
